@@ -1,25 +1,40 @@
-import logo from './logo.svg';
 import './App.css';
+import Chat from './components/Chat';
+import { Component } from "react";
 
-function App() {
-  return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
-  );
+
+class App extends Component {
+  constructor(props) {
+    super(props);
+    this.state = {value: ''};
+
+    this.handleChange = this.handleChange.bind(this);
+  }
+
+  handleChange(event) {
+    this.setState({value: event.target.value});
+  }
+
+  startChat = (event) => {
+    console.log(event);
+    event.preventDefault();
+    <Chat from={this.state.value}/>
+
+  };
+
+  render() {
+    return (
+      <div>
+      <form onSubmit={this.startChat}>
+        <label>
+          Nome:
+          <input type="text" value={this.state.value} onChange={this.handleChange} />
+        </label>
+        <input type="submit" value="Invia" />
+      </form>
+      </div>
+    );
+  }
 }
 
 export default App;
